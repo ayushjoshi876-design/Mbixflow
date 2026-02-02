@@ -1,599 +1,360 @@
 <!DOCTYPE html>
-<html lang="hi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mbixflow — Digital Experiences & Motion-First Websites</title>
-    <meta name="description" content="Mbixflow: Motion-first, premium static websites for modern brands. Strategy, design, and performance that converts." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mbixflow | Digital Solutions & Software Development</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1', // Indigo
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#312e81',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-      :root {
-        --bg: #07070b;
-        --bg-2: #0e0f1a;
-        --surface: rgba(255, 255, 255, 0.04);
-        --surface-2: rgba(255, 255, 255, 0.08);
-        --text: #e9ecf8;
-        --muted: #aab0c6;
-        --brand: #6c6bff;
-        --brand-2: #53f2c5;
-        --accent: #ff7bda;
-        --glow: 0 0 40px rgba(108, 107, 255, 0.35);
-        --radius: 20px;
-        --shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
-      }
-
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-
-      body {
-        font-family: "Manrope", sans-serif;
-        background: radial-gradient(1200px 600px at 10% 10%, rgba(108, 107, 255, 0.2), transparent),
-          radial-gradient(1000px 600px at 90% 20%, rgba(83, 242, 197, 0.16), transparent),
-          var(--bg);
-        color: var(--text);
-        line-height: 1.6;
-        overflow-x: hidden;
-      }
-
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-
-      .container {
-        width: min(1200px, 92%);
-        margin: 0 auto;
-      }
-
-      header {
-        position: sticky;
-        top: 0;
-        z-index: 10;
-        backdrop-filter: blur(12px);
-        background: rgba(7, 7, 11, 0.7);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      }
-
-      .nav {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 18px 0;
-      }
-
-      .logo {
-        font-weight: 800;
-        letter-spacing: 0.5px;
-        font-size: 22px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-
-      .logo-badge {
-        width: 36px;
-        height: 36px;
-        border-radius: 12px;
-        background: linear-gradient(135deg, var(--brand), var(--accent));
-        display: grid;
-        place-items: center;
-        box-shadow: var(--glow);
-        font-weight: 700;
-      }
-
-      .nav-links {
-        display: flex;
-        gap: 24px;
-        font-weight: 500;
-        color: var(--muted);
-      }
-
-      .cta {
-        padding: 12px 22px;
-        border-radius: 999px;
-        background: linear-gradient(135deg, var(--brand), var(--accent));
-        box-shadow: var(--glow);
-        font-weight: 600;
-      }
-
-      .hero {
-        padding: 96px 0 80px;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 40px;
-        align-items: center;
-      }
-
-      .hero h1 {
-        font-size: clamp(36px, 5vw, 62px);
-        line-height: 1.1;
-        margin-bottom: 18px;
-      }
-
-      .hero p {
-        color: var(--muted);
-        margin-bottom: 28px;
-        font-size: 18px;
-      }
-
-      .hero-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 16px;
-      }
-
-      .button {
-        padding: 14px 26px;
-        border-radius: 999px;
-        background: var(--surface);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        font-weight: 600;
-      }
-
-      .button.primary {
-        background: linear-gradient(135deg, var(--brand-2), var(--brand));
-        color: #051015;
-      }
-
-      .hero-card {
-        position: relative;
-        background: linear-gradient(140deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
-        border-radius: var(--radius);
-        padding: 28px;
-        box-shadow: var(--shadow);
-        overflow: hidden;
-      }
-
-      .hero-card::before {
-        content: "";
-        position: absolute;
-        inset: -30%;
-        background: radial-gradient(circle at 30% 30%, rgba(108, 107, 255, 0.35), transparent 50%);
-        animation: pulse 8s ease-in-out infinite;
-      }
-
-      .hero-card-content {
-        position: relative;
-        z-index: 1;
-      }
-
-      .hero-metrics {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 16px;
-        margin-top: 26px;
-      }
-
-      .metric {
-        background: var(--surface);
-        padding: 16px;
-        border-radius: 16px;
-        text-align: center;
-      }
-
-      .metric strong {
-        font-size: 24px;
-        display: block;
-      }
-
-      section {
-        padding: 80px 0;
-      }
-
-      .section-title {
-        font-size: clamp(26px, 3vw, 40px);
-        margin-bottom: 16px;
-      }
-
-      .section-subtitle {
-        color: var(--muted);
-        margin-bottom: 36px;
-        max-width: 720px;
-      }
-
-      .grid-3 {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 22px;
-      }
-
-      .card {
-        background: var(--surface);
-        padding: 24px;
-        border-radius: var(--radius);
-        border: 1px solid rgba(255, 255, 255, 0.06);
-        transition: transform 0.4s ease, box-shadow 0.4s ease;
-      }
-
-      .card:hover {
-        transform: translateY(-8px);
-        box-shadow: var(--shadow);
-      }
-
-      .pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 6px 14px;
-        border-radius: 999px;
-        background: rgba(108, 107, 255, 0.18);
-        color: #b9b6ff;
-        font-size: 12px;
-        font-weight: 600;
-        letter-spacing: 0.4px;
-        text-transform: uppercase;
-        margin-bottom: 14px;
-      }
-
-      .portfolio {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 22px;
-      }
-
-      .portfolio-item {
-        background: linear-gradient(145deg, rgba(83, 242, 197, 0.08), rgba(255, 123, 218, 0.08));
-        padding: 22px;
-        border-radius: var(--radius);
-        min-height: 220px;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .portfolio-item::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: radial-gradient(circle at 80% 20%, rgba(108, 107, 255, 0.3), transparent 45%);
-        opacity: 0;
-        transition: opacity 0.4s ease;
-      }
-
-      .portfolio-item:hover::after {
-        opacity: 1;
-      }
-
-      .steps {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 24px;
-      }
-
-      .step-number {
-        font-size: 32px;
-        font-weight: 800;
-        color: var(--brand-2);
-      }
-
-      .banner {
-        background: linear-gradient(135deg, rgba(108, 107, 255, 0.24), rgba(83, 242, 197, 0.2));
-        padding: 50px;
-        border-radius: var(--radius);
-        display: grid;
-        gap: 16px;
-        text-align: center;
-      }
-
-      .contact {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 24px;
-      }
-
-      .contact-card {
-        background: var(--surface);
-        padding: 24px;
-        border-radius: var(--radius);
-      }
-
-      footer {
-        padding: 40px 0 60px;
-        border-top: 1px solid rgba(255, 255, 255, 0.06);
-        color: var(--muted);
-      }
-
-      .in-view {
-        animation: rise 1s ease forwards;
-      }
-
-      .reveal {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-
-      .floaty {
-        animation: floaty 5s ease-in-out infinite;
-      }
-
-      @keyframes rise {
-        0% {
-          opacity: 0;
-          transform: translateY(30px);
+        [x-cloak] { display: none !important; }
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #4f46e5, #9333ea);
         }
-        100% {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      @keyframes pulse {
-        0%,
-        100% {
-          transform: scale(1);
-        }
-        50% {
-          transform: scale(1.2);
-        }
-      }
-
-      @keyframes floaty {
-        0%,
-        100% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(-14px);
-        }
-      }
-
-      @media (max-width: 900px) {
-        .nav-links {
-          display: none;
-        }
-        .hero {
-          padding-top: 60px;
-        }
-      }
     </style>
-  </head>
-  <body>
-    <header>
-      <div class="container nav">
-        <div class="logo">
-          <div class="logo-badge">M</div>
-          Mbixflow
-        </div>
-        <nav class="nav-links">
-          <a href="#about">About</a>
-          <a href="#services">Services</a>
-          <a href="#portfolio">Portfolio</a>
-          <a href="#process">Process</a>
-          <a href="#contact">Contact</a>
-        </nav>
-        <a class="cta" href="#contact">Free Strategy Call</a>
-      </div>
-    </header>
+</head>
+<!-- Initialize Alpine data for Theme and Mobile Menu -->
+<body class="antialiased text-slate-800 bg-white dark:bg-[#0f1117] dark:text-slate-200 transition-colors duration-300"
+      x-data="{ 
+          darkMode: localStorage.getItem('theme') === 'dark',
+          mobileMenu: false,
+          toggleTheme() {
+              this.darkMode = !this.darkMode;
+              localStorage.setItem('theme', this.darkMode ? 'dark' : 'light');
+              if (this.darkMode) {
+                  document.documentElement.classList.add('dark');
+              } else {
+                  document.documentElement.classList.remove('dark');
+              }
+          }
+      }"
+      x-init="$watch('darkMode', val => val ? document.documentElement.classList.add('dark') : document.documentElement.classList.remove('dark')); if(darkMode) document.documentElement.classList.add('dark');"
+>
 
-    <main>
-      <section class="container hero">
-        <div class="reveal">
-          <div class="pill">Motion First Studio</div>
-          <h1>Mbixflow ke saath banaye brand ko future-ready digital experience</h1>
-          <p>
-            Hum high-performance static websites design karte hain jaha premium visuals, smooth animations aur conversion focused
-            storytelling milta hai. Aapka brand dikhna bhi chahiye aur feel bhi hona chahiye.
-          </p>
-          <div class="hero-actions">
-            <a class="button primary" href="#portfolio">Our Work</a>
-            <a class="button" href="#contact">Get Proposal</a>
-          </div>
-        </div>
-        <div class="hero-card reveal floaty">
-          <div class="hero-card-content">
-            <h3>Strategy + Design + Motion</h3>
-            <p>Brand ko bold banane ke liye modern UI, micro-interactions aur smooth scroll story.</p>
-            <div class="hero-metrics">
-              <div class="metric">
-                <strong data-counter="120">0</strong>
-                <span>Projects</span>
-              </div>
-              <div class="metric">
-                <strong data-counter="96">0</strong>
-                <span>Client Satisfaction</span>
-              </div>
-              <div class="metric">
-                <strong data-counter="28">0</strong>
-                <span>Days Avg Launch</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/80 dark:bg-[#0f1117]/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="w-8 h-8 rounded-lg bg-primary-600 flex items-center justify-center text-white font-bold">M</div>
+                    <span class="font-bold text-xl tracking-tight text-slate-900 dark:text-white">Mbixflow</span>
+                </div>
 
-      <section id="about">
-        <div class="container">
-          <div class="pill">What is Mbixflow</div>
-          <h2 class="section-title">Mbixflow ek motion-first creative studio hai</h2>
-          <p class="section-subtitle">
-            Hum static websites ko aise craft karte hain jaise high-end product experience. Brand story ko clear, modern aur
-            unforgettable banana hi hamara core hai.
-          </p>
-          <div class="grid-3">
-            <div class="card reveal">
-              <h3>Brand Storytelling</h3>
-              <p>Aapka message simple, sharp aur visually impactful banate hain.</p>
-            </div>
-            <div class="card reveal">
-              <h3>Performance Ready</h3>
-              <p>Fast load, SEO-friendly structure aur clean static architecture.</p>
-            </div>
-            <div class="card reveal">
-              <h3>High-End Motion</h3>
-              <p>Smooth transitions, scroll reveals aur micro-interactions.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#services" class="text-sm font-medium hover:text-primary-600 dark:hover:text-primary-400 transition">Services</a>
+                    <a href="#work" class="text-sm font-medium hover:text-primary-600 dark:hover:text-primary-400 transition">Portfolio</a>
+                    <a href="#about" class="text-sm font-medium hover:text-primary-600 dark:hover:text-primary-400 transition">About</a>
+                    
+                    <!-- Theme Toggle -->
+                    <button @click="toggleTheme()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition text-slate-600 dark:text-slate-400">
+                        <svg x-show="!darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                        <svg x-show="darkMode" x-cloak class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    </button>
 
-      <section id="services">
-        <div class="container">
-          <div class="pill">Services</div>
-          <h2 class="section-title">Dhasu digital stack for new age brands</h2>
-          <p class="section-subtitle">Static website, no backend, but full brand impact.</p>
-          <div class="grid-3">
-            <div class="card reveal">
-              <h3>Landing Page + Portfolio</h3>
-              <p>Hero to contact, full conversion flow with motion.</p>
-            </div>
-            <div class="card reveal">
-              <h3>Brand Identity</h3>
-              <p>Color, typography aur visual rhythm jo brand ko premium feel de.</p>
-            </div>
-            <div class="card reveal">
-              <h3>SEO + Speed</h3>
-              <p>Meta structure, fast assets aur static optimization.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+                    <a href="#contact" class="px-5 py-2.5 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-700 transition shadow-lg shadow-primary-500/30">
+                        Start Project
+                    </a>
+                </div>
 
-      <section id="portfolio">
-        <div class="container">
-          <div class="pill">Portfolio</div>
-          <h2 class="section-title">Selected experiences by Mbixflow</h2>
-          <p class="section-subtitle">Yaha aap apne real projects ya case studies add kar sakte ho.</p>
-          <div class="portfolio">
-            <div class="portfolio-item reveal">
-              <h3>Studio Grid</h3>
-              <p>Immersive landing + animated highlights</p>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center gap-4">
+                    <button @click="toggleTheme()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition text-slate-600 dark:text-slate-400">
+                        <svg x-show="!darkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                        <svg x-show="darkMode" x-cloak class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    </button>
+                    <button @click="mobileMenu = !mobileMenu" class="text-slate-600 dark:text-slate-300">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    </button>
+                </div>
             </div>
-            <div class="portfolio-item reveal">
-              <h3>FlowTech</h3>
-              <p>Minimal product story + metrics dashboard</p>
-            </div>
-            <div class="portfolio-item reveal">
-              <h3>NovaPulse</h3>
-              <p>Bold gradients + motion driven sections</p>
-            </div>
-            <div class="portfolio-item reveal">
-              <h3>AxisCraft</h3>
-              <p>Premium agency portfolio + scrolling narrative</p>
-            </div>
-          </div>
         </div>
-      </section>
+        
+        <!-- Mobile Menu Dropdown -->
+        <div x-show="mobileMenu" x-cloak class="md:hidden bg-white dark:bg-[#0f1117] border-t border-slate-200 dark:border-slate-800">
+            <div class="px-4 pt-2 pb-4 space-y-1">
+                <a href="#services" @click="mobileMenu = false" class="block px-3 py-2 text-base font-medium rounded-md hover:bg-slate-50 dark:hover:bg-slate-800">Services</a>
+                <a href="#work" @click="mobileMenu = false" class="block px-3 py-2 text-base font-medium rounded-md hover:bg-slate-50 dark:hover:bg-slate-800">Portfolio</a>
+                <a href="#about" @click="mobileMenu = false" class="block px-3 py-2 text-base font-medium rounded-md hover:bg-slate-50 dark:hover:bg-slate-800">About</a>
+                <a href="#contact" @click="mobileMenu = false" class="block px-3 py-2 text-base font-medium text-primary-600 font-bold">Start a Project</a>
+            </div>
+        </div>
+    </nav>
 
-      <section id="process">
-        <div class="container">
-          <div class="pill">How We Work</div>
-          <h2 class="section-title">Simple process, premium results</h2>
-          <p class="section-subtitle">Har step pe aapko visibility milegi, delivery fast aur polished hogi.</p>
-          <div class="steps">
-            <div class="card reveal">
-              <div class="step-number">01</div>
-              <h3>Discovery Call</h3>
-              <p>Goal, audience aur brand vibe samjhte hain.</p>
-            </div>
-            <div class="card reveal">
-              <div class="step-number">02</div>
-              <h3>Design Sprint</h3>
-              <p>Wireframe se visual direction finalize karte hain.</p>
-            </div>
-            <div class="card reveal">
-              <div class="step-number">03</div>
-              <h3>Build + Motion</h3>
-              <p>Static site with interactive animations aur speed.</p>
-            </div>
-            <div class="card reveal">
-              <div class="step-number">04</div>
-              <h3>Launch & Support</h3>
-              <p>Vercel launch + domain setup guidance.</p>
-            </div>
-          </div>
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none">
+            <div class="absolute top-20 left-10 w-72 h-72 bg-primary-500/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
         </div>
-      </section>
 
-      <section>
-        <div class="container banner reveal">
-          <h2>Ready to make Mbixflow your growth engine?</h2>
-          <p>Brand ko next level pe le jao with a static, high-converting website.</p>
-          <div class="hero-actions" style="justify-content: center;">
-            <a class="button primary" href="#contact">Book Call</a>
-            <a class="button" href="#portfolio">See Work</a>
-          </div>
-        </div>
-      </section>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+                <!-- Text Content -->
+                <div class="text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 mb-6">
+                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                        <span class="text-xs font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-400">Available for new projects</span>
+                    </div>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
+                        Building Digital Experiences That <span class="gradient-text">Actually Convert</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                        We help businesses grow with high-performing websites, custom applications, and software solutions designed around your goals.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#contact" class="px-8 py-3.5 text-base font-semibold text-white bg-primary-600 rounded-xl hover:bg-primary-700 transition shadow-lg shadow-primary-600/20 text-center">
+                            Get Started
+                        </a>
+                        <a href="#work" class="px-8 py-3.5 text-base font-semibold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition text-center">
+                            View Portfolio
+                        </a>
+                    </div>
+                    
+                    <div class="mt-10 flex items-center justify-center lg:justify-start gap-8 opacity-75 grayscale hover:grayscale-0 transition duration-500">
+                        <!-- Simple Text Logos for Trust -->
+                        <span class="text-lg font-bold text-slate-400">Laravel</span>
+                        <span class="text-lg font-bold text-slate-400">Tailwind</span>
+                        <span class="text-lg font-bold text-slate-400">Alpine.js</span>
+                        <span class="text-lg font-bold text-slate-400">React</span>
+                    </div>
+                </div>
 
-      <section id="contact">
-        <div class="container">
-          <div class="pill">Contact</div>
-          <h2 class="section-title">Chaliye start karte hain</h2>
-          <p class="section-subtitle">Aapke brand ke liye ek zabardast, animated static website ready hai.</p>
-          <div class="contact">
-            <div class="contact-card reveal">
-              <h3>Email</h3>
-              <p>hello@mbixflow.com</p>
+                <!-- Visual Content (Bento Grid Style) -->
+                <div class="relative lg:h-[500px] w-full hidden lg:block">
+                    <div class="absolute inset-0 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-2xl overflow-hidden">
+                        <!-- Mockup of a Dashboard -->
+                        <div class="w-full h-full bg-white dark:bg-[#0f1117] rounded-xl border border-slate-200 dark:border-slate-700 p-4 shadow-inner relative">
+                            <!-- Header -->
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="flex gap-2">
+                                    <div class="w-3 h-3 rounded-full bg-red-400"></div>
+                                    <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+                                    <div class="w-3 h-3 rounded-full bg-green-400"></div>
+                                </div>
+                                <div class="h-2 w-20 bg-slate-100 dark:bg-slate-800 rounded"></div>
+                            </div>
+                            <!-- Content Grid -->
+                            <div class="grid grid-cols-3 gap-4 mb-4">
+                                <div class="col-span-2 h-32 bg-primary-50 dark:bg-primary-900/20 rounded-lg border border-primary-100 dark:border-primary-800/30 p-4 relative overflow-hidden group">
+                                    <div class="absolute top-4 left-4 text-xs font-semibold text-primary-600 dark:text-primary-400">Total Revenue</div>
+                                    <div class="absolute top-9 left-4 text-2xl font-bold text-slate-900 dark:text-white">$124,500</div>
+                                    <div class="absolute bottom-0 right-0 w-24 h-24 bg-primary-500/10 rounded-tl-full"></div>
+                                </div>
+                                <div class="col-span-1 h-32 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-100 dark:border-slate-700 p-4">
+                                    <div class="w-8 h-8 rounded bg-orange-100 dark:bg-orange-900/30 text-orange-600 flex items-center justify-center mb-2">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                                    </div>
+                                    <div class="text-xs text-slate-500">Growth</div>
+                                    <div class="font-bold text-green-500">+24%</div>
+                                </div>
+                            </div>
+                            <!-- List Mockup -->
+                            <div class="space-y-3">
+                                <div class="h-12 w-full bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-100 dark:border-slate-700 flex items-center px-4 justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-6 h-6 rounded bg-slate-200 dark:bg-slate-700"></div>
+                                        <div class="w-24 h-2 bg-slate-200 dark:bg-slate-700 rounded"></div>
+                                    </div>
+                                    <div class="w-12 h-6 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 text-[10px] flex items-center justify-center font-bold">ACTIVE</div>
+                                </div>
+                                <div class="h-12 w-full bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-100 dark:border-slate-700 flex items-center px-4 justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-6 h-6 rounded bg-slate-200 dark:bg-slate-700"></div>
+                                        <div class="w-32 h-2 bg-slate-200 dark:bg-slate-700 rounded"></div>
+                                    </div>
+                                    <div class="w-12 h-6 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 text-[10px] flex items-center justify-center font-bold">NEW</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Floating Card -->
+                            <div class="absolute -bottom-4 -right-4 bg-white dark:bg-slate-800 p-4 rounded-xl shadow-xl border border-slate-100 dark:border-slate-600 w-48 animate-bounce" style="animation-duration: 3s;">
+                                <div class="flex items-center gap-3">
+                                    <div class="bg-green-100 dark:bg-green-900/30 p-2 rounded-lg text-green-600">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-slate-500">Project Status</div>
+                                        <div class="text-sm font-bold">Shipped 🚀</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="contact-card reveal">
-              <h3>WhatsApp</h3>
-              <p>+91 90000 00000</p>
-            </div>
-            <div class="contact-card reveal">
-              <h3>Location</h3>
-              <p>Remote — India & Global</p>
-            </div>
-          </div>
         </div>
-      </section>
-    </main>
+    </section>
 
-    <footer>
-      <div class="container">
-        <div class="logo" style="margin-bottom: 12px;">
-          <div class="logo-badge">M</div>
-          Mbixflow
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-slate-50 dark:bg-[#0f1117]/50 border-y border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold mb-4">Services built for scale</h2>
+                <p class="text-slate-600 dark:text-slate-400">Everything you need to launch and grow your digital presence.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-primary-500 dark:hover:border-primary-600 transition group cursor-pointer">
+                    <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-xl flex items-center justify-center text-primary-600 mb-6 group-hover:scale-110 transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Website Development</h3>
+                    <p class="text-slate-600 dark:text-slate-400 mb-4 text-sm leading-relaxed">
+                        High-performance websites built with Laravel & Tailwind CSS. SEO-optimized and mobile-first.
+                    </p>
+                    <ul class="text-xs text-slate-500 dark:text-slate-500 space-y-1">
+                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary-500 rounded-full"></span> Landing Pages</li>
+                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary-500 rounded-full"></span> CMS Integration</li>
+                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary-500 rounded-full"></span> E-commerce Stores</li>
+                    </ul>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-primary-500 dark:hover:border-primary-600 transition group cursor-pointer">
+                    <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center text-purple-600 mb-6 group-hover:scale-110 transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">App Development</h3>
+                    <p class="text-slate-600 dark:text-slate-400 mb-4 text-sm leading-relaxed">
+                        Native and cross-platform mobile apps using React Native and Flutter.
+                    </p>
+                    <ul class="text-xs text-slate-500 dark:text-slate-500 space-y-1">
+                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-purple-500 rounded-full"></span> iOS & Android</li>
+                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-purple-500 rounded-full"></span> User Authentication</li>
+                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-purple-500 rounded-full"></span> API Integration</li>
+                    </ul>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-primary-500 dark:hover:border-primary-600 transition group cursor-pointer">
+                    <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center text-blue-600 mb-6 group-hover:scale-110 transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Custom Software</h3>
+                    <p class="text-slate-600 dark:text-slate-400 mb-4 text-sm leading-relaxed">
+                        Tailor-made software solutions to automate business workflows and data management.
+                    </p>
+                    <ul class="text-xs text-slate-500 dark:text-slate-500 space-y-1">
+                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-blue-500 rounded-full"></span> CRM & ERP Systems</li>
+                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-blue-500 rounded-full"></span> Data Analytics</li>
+                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-blue-500 rounded-full"></span> Cloud Solutions</li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <p>© 2026 Mbixflow. Motion-first digital studio.</p>
-      </div>
+    </section>
+
+    <!-- Stats / Bento Row -->
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 p-6 rounded-2xl text-center">
+                    <div class="text-3xl font-bold text-slate-900 dark:text-white mb-1">3+</div>
+                    <div class="text-sm text-slate-500">Years Experience</div>
+                </div>
+                <div class="bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 p-6 rounded-2xl text-center">
+                    <div class="text-3xl font-bold text-slate-900 dark:text-white mb-1">50+</div>
+                    <div class="text-sm text-slate-500">Projects Shipped</div>
+                </div>
+                <div class="bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 p-6 rounded-2xl text-center">
+                    <div class="text-3xl font-bold text-slate-900 dark:text-white mb-1">100%</div>
+                    <div class="text-sm text-slate-500">Client Satisfaction</div>
+                </div>
+                <div class="bg-primary-600 p-6 rounded-2xl text-center text-white flex flex-col items-center justify-center">
+                    <div class="font-semibold">Ready to scale?</div>
+                    <a href="#contact" class="text-sm underline opacity-90 hover:opacity-100 mt-1">Contact Us -></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-[#0f1117] border-t border-slate-200 dark:border-slate-800 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-6 h-6 rounded bg-primary-600 flex items-center justify-center text-white font-bold text-xs">M</div>
+                        <span class="font-bold text-lg text-slate-900 dark:text-white">Mbixflow</span>
+                    </div>
+                    <p class="text-slate-500 text-sm leading-relaxed">
+                        Crafting high-quality digital solutions for forward-thinking businesses.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-slate-500 dark:text-slate-400">
+                        <li><a href="#" class="hover:text-primary-600 transition">About</a></li>
+                        <li><a href="#" class="hover:text-primary-600 transition">Careers</a></li>
+                        <li><a href="#" class="hover:text-primary-600 transition">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-4">Services</h4>
+                    <ul class="space-y-2 text-sm text-slate-500 dark:text-slate-400">
+                        <li><a href="#" class="hover:text-primary-600 transition">Web Development</a></li>
+                        <li><a href="#" class="hover:text-primary-600 transition">App Development</a></li>
+                        <li><a href="#" class="hover:text-primary-600 transition">UI/UX Design</a></li>
+                    </ul>
+                </div>
+
+                <div id="contact">
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-4">Get in touch</h4>
+                    <ul class="space-y-2 text-sm text-slate-500 dark:text-slate-400">
+                        <li>info@mbixflow.com</li>
+                        <li>+91 90239 96642</li>
+                        <li>Bhavnagar, Gujarat, India</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-slate-100 dark:border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-xs text-slate-400">© 2026 Mbixflow. All rights reserved.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition">
+                        <span class="sr-only">Twitter</span>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path></svg>
+                    </a>
+                    <a href="#" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition">
+                        <span class="sr-only">LinkedIn</span>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
     </footer>
 
-    <script>
-      const revealItems = document.querySelectorAll(".reveal");
-      const counters = document.querySelectorAll("[data-counter]");
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("in-view");
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.2 }
-      );
-
-      revealItems.forEach((item) => observer.observe(item));
-
-      const countObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            const element = entry.target;
-            const target = Number(element.dataset.counter);
-            let current = 0;
-            const step = Math.max(1, Math.floor(target / 60));
-            const interval = setInterval(() => {
-              current += step;
-              if (current >= target) {
-                element.textContent = target + (element.dataset.counter === "96" ? "%" : "+");
-                clearInterval(interval);
-                return;
-              }
-              element.textContent = current;
-            }, 20);
-            countObserver.unobserve(element);
-          });
-        },
-        { threshold: 0.4 }
-      );
-
-      counters.forEach((counter) => countObserver.observe(counter));
-    </script>
-  </body>
+</body>
 </html>
